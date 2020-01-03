@@ -29,6 +29,32 @@ module ALUnit(in1, in2, ctrlALU, result,of,je,ja);
 			6'b000111: result = ~in1; // not
 			6'b001000: result = in1 << in2; // bit shift esquerda
 			6'b001001: result = in1 >> in2; // bit shift direita
+			6'b001010: result = in1 / in2; // divisão
+			6'b001011: begin // equal
+			   if(in1 == in2) result <= 32'b00000000000000000000000000000001;
+				else result <= 32'b00000000000000000000000000000000;
+			end
+			6'b001100: begin // not equal
+			   if(in1 != in2) result <= 32'b00000000000000000000000000000001;
+				else result <= 32'b00000000000000000000000000000000;
+			end
+			6'b001101: begin // above
+			   if($signed(in1) > $signed(in2)) result <= 32'b00000000000000000000000000000001;
+				else result <= 32'b00000000000000000000000000000000;
+			end
+			6'b001110: begin // not above
+			   if($signed(in1) <= $signed(in2)) result <= 32'b00000000000000000000000000000001;
+				else result <= 32'b00000000000000000000000000000000;
+			end
+			6'b001111: begin // less than
+			   if($signed(in1) < $signed(in2)) result <= 32'b00000000000000000000000000000001;
+				else result <= 32'b00000000000000000000000000000000;
+			end
+			6'b010000: begin // not less than
+			   if($signed(in1) >= $signed(in2)) result <= 32'b00000000000000000000000000000001;
+				else result <= 32'b00000000000000000000000000000000;
+			end
+			
 			default: result = 32'b00000000000000000000000000000000;
 		endcase
 		

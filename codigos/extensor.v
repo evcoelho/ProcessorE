@@ -13,9 +13,9 @@ module extensor(in16, in21, ctrl, extendido);
 			end
 			1'b0: begin // extende os 21 bits para 32
 				if(in21[20] == 1)begin 
-					extendido = {16'b11111111111,in21};
+					extendido = {11'b11111111111,in21};
 				end else
-					extendido = {16'b00000000000,in21};
+					extendido = {11'b00000000000,in21};
 			end
 			default: extendido = 32'b00000000000000000000000000000000;
 		endcase
